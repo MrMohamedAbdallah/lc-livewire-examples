@@ -208,4 +208,12 @@ class DataTablesTest extends TestCase
             ->call('sortBy', 'email')
             ->assertSeeInOrder(['Cathy C', 'Brian B', 'Andre A']);
     }
+
+    /** @test */
+    public function only_allowed_sorting_fields()
+    {
+        Livewire::test(DataTables::class)
+            ->call('sortBy', 'not_a_field_in_the_list')
+            ->assertSet('sortField', '');
+    }
 }

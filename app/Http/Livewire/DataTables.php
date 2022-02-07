@@ -15,9 +15,14 @@ class DataTables extends Component
     public $sortField;
     public $sortAsc = true;
     protected $queryString = ['search', 'active', 'sortAsc', 'sortField'];
+    protected $sortingFields = ['name', 'email'];
 
     public function sortBy($field)
     {
+        if (!in_array($field, $this->sortingFields)) {
+            $field = '';
+        }
+
         if ($this->sortField === $field) {
             $this->sortAsc = !$this->sortAsc;
         } else {
